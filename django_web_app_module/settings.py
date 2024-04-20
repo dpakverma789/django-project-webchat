@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-onrcnb0qa7ky7prz7x5(gf34=0(@#2t#iv)gle!cd-v99rw=vl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '192.168.237.35']
 
 
 # Application definition
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'django_web_app_module.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'snuffleupagus.db.elephantsql.com',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'uawhyquc',
         'USER': 'uawhyquc',
         'PASSWORD': 'FC-0MSOEBIIDaCXfXXG0GfubkoPl7UrU',
