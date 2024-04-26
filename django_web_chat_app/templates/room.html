@@ -22,7 +22,6 @@
                 <button class="send-button" type="submit" value="send">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
-<!--                <input type="submit" value="Send" class="send-button">-->
             </span>
         </footer>
     </form>
@@ -40,7 +39,12 @@ setInterval(function(){
             $(".chat-container").empty();
             for (var key of response.messages)
             {
-                var temp="<section class='chat-body'><div class='user-name'>"+key.user_name+"</div><div class='user-msg'>"+key.message+"</div><div class='time-stamp'>"+key.date_time+"</div></section>";
+                var temp=
+                `<section class='chat-body'>
+                    <div class='user-name'>${key.user_name}</div>
+                    <div class='user-msg'>${key.message}</div>
+                    <div class='time-stamp'>${key.date_time}</div>
+                </section>`;
                 $(".chat-container").append(temp);
             }
         },
