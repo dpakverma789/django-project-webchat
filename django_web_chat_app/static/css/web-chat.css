@@ -155,6 +155,11 @@ body{
     cursor: pointer;
 }
 
-.fa-keyboard:hover{
-    background-color: red;
+.scroll-down{
+    position: fixed;
+    color: #000;
+    bottom: 7vh;
+    font-size: 30px;
+    right: 5vw;
+    cursor: pointer;
 }

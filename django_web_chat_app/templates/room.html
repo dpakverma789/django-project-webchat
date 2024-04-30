@@ -9,6 +9,7 @@
         <span class="room-exit"><a href="/">Exit</a></span>
     </nav>
     <section class="chat-container"></section>
+    <span class="scroll-down"><i class="fa-solid fa-circle-chevron-down"></i></span>
     <form id="post-form">
         {% csrf_token %}
         <footer class="msg-box">
@@ -53,25 +54,29 @@ setInterval(function(){
         }
     });
 },500);
+
+    function scrolling(){
+     $(".chat-container").animate({ scrollTop: $('.chat-container').get(0).scrollHeight }, 2000);
+    }
+    $("button").click(scrolling);
+    $(".scroll-down").click(scrolling);
+
 })
 
 
 $(document).on('submit','#post-form',function(e){
 e.preventDefault();
-
 $.ajax({
-  type:'POST',
-  url:'/send',
-  data:{
-      username:$('#username').val(),
-      room_id:$('#room_id').val(),
-      message:$('#message').val(),
-      csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-  }
+    type:'POST',
+    url:'/send',
+    data:{
+        username:$('#username').val(),
+        room_id:$('#room_id').val(),
+        message:$('#message').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+    }
 });
 document.getElementById('message').value = ''
 });
-$(".chat-body").animate({ scrollTop: 20000000 }, "slow");
-
 </script>
 {% endblock %}
