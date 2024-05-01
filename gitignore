@@ -1,3 +1,4 @@
-django_project/__pycache__/
+django_web_chat_app/__pycache__/
+django_web_chat_app/migrations/__pycache__/
 ./__pycache__
 __pycache__
