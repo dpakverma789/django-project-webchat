@@ -82,10 +82,7 @@ DATABASES = {
         'USER': 'uawhyquc',
         'PASSWORD': 'FC-0MSOEBIIDaCXfXXG0GfubkoPl7UrU',
         'HOST': 'snuffleupagus.db.elephantsql.com',
-        'PORT': 5432,
-        'OPTIONS': {
-           "init_command": "SET GLOBAL max_connections = 100000"
-        }
+        'PORT': 5432
     }
 }
 
