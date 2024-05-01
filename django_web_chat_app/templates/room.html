@@ -6,8 +6,10 @@
         <image class="chat-logo" src="https://www.svgrepo.com/show/509800/chat-emoji.svg"/>
         <span class="chat-name">{{ room }}</span>
         <span class="chat-name" style="left: 50%;">Deep Chat</span>
+        <span class="room-exit"><a href="/">Exit</a></span>
     </nav>
     <section class="chat-container"></section>
+    <span class="scroll-down"><i class="fa-solid fa-circle-chevron-down"></i></span>
     <form id="post-form">
         {% csrf_token %}
         <footer class="msg-box">
@@ -21,7 +23,6 @@
                 <button class="send-button" type="submit" value="send">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
-<!--                <input type="submit" value="Send" class="send-button">-->
             </span>
         </footer>
     </form>
@@ -39,7 +40,12 @@ setInterval(function(){
             $(".chat-container").empty();
             for (var key of response.messages)
             {
-                var temp="<section class='chat-body'><div class='user-name'>"+key.user_name+"</div><div class='user-msg'>"+key.message+"</div><div class='time-stamp'>"+key.date_time+"</div></section>";
+                var temp=
+                `<section class='chat-body'>
+                    <div class='user-name'>${key.user_name}</div>
+                    <div class='user-msg'>${key.message}</div>
+                    <div class='time-stamp'>${key.date_time}</div>
+                </section>`;
                 $(".chat-container").append(temp);
             }
         },
@@ -48,25 +54,29 @@ setInterval(function(){
         }
     });
 },500);
+
+    function scrolling(){
+     $(".chat-container").animate({ scrollTop: $('.chat-container').get(0).scrollHeight }, 2000);
+    }
+    $("button").click(scrolling);
+    $(".scroll-down").click(scrolling);
+
 })
 
 
 $(document).on('submit','#post-form',function(e){
 e.preventDefault();
-
 $.ajax({
-  type:'POST',
-  url:'/send',
-  data:{
-      username:$('#username').val(),
-      room_id:$('#room_id').val(),
-      message:$('#message').val(),
-      csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-  }
+    type:'POST',
+    url:'/send',
+    data:{
+        username:$('#username').val(),
+        room_id:$('#room_id').val(),
+        message:$('#message').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+    }
 });
 document.getElementById('message').value = ''
 });
-$(".chat-body").animate({ scrollTop: 20000000 }, "slow");
-
 </script>
 {% endblock %}

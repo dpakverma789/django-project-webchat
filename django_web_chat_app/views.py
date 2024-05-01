@@ -46,4 +46,4 @@ def send_msg(request):
 def fetch_messages(request, room):
     if room:
         chats = UserMessage.objects.filter(room_name=room)
-        return JsonResponse({"messages":list(chats.values())})
+        return JsonResponse({"messages": list(chats.values())})

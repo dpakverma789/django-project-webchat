@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '192.168.237.35']
 
-
 # Application definition
 
 INSTALLED_APPS = [
