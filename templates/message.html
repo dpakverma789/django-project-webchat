@@ -1,0 +1,116 @@
+{% extends 'web-chat-base-template.html' %}
+
+{% block body %}
+<body>
+<nav class="chat-header">
+    <image class="chat-logo" src="https://www.svgrepo.com/show/509800/chat-emoji.svg"></image>
+    <span class="chat-name">{{ user }}</span>
+    <span class="chat-name" style="left: 50%;">Deep Chat</span>
+    <span class="room-exit"><a href="/">Exit</a></span>
+</nav>
+<section class="chat-container">
+    {% for i in messages %}
+        {% if i.sender != user %}
+            <section class='chat-body receiver'>
+                <div class='user-name'>{{i.sender}}</div>
+                <div class='user-msg'>{{i.message}}</div>
+                <div class='time-stamp'>{{i.date_time}}</div>
+            </section>
+        {% else %}
+            <section class='chat-body sender'>
+                <div class='user-name'>{{i.sender}}</div>
+                <div class='user-msg'>{{i.message}}</div>
+                <div class='time-stamp'>{{i.date_time}}</div>
+            </section>
+        {% endif %}
+    {% endfor %}
+</section>
+<span class="scroll-down"><i class="fa-solid fa-circle-chevron-down"></i></span>
+<form id="post-form" method="POST">
+    {% csrf_token %}
+    <footer class="msg-box">
+            <span class="msg-icon">
+                <i class="fa-solid fa-keyboard"></i>
+                <input type="text" placeholder="your message..." name="message" id="message"/>
+            </span>
+        <span class="send">
+                <button class="send-button" type="submit" value="send">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </span>
+    </footer>
+</form>
+</body>
+{% endblock %}
+
+{% block script %}
+<script>
+    function scrollToBottom() {
+        $(".chat-container").animate({ scrollTop: $('.chat-container').get(0).scrollHeight }, 2000);
+        $(".chat-container").load(location.href+" .chat-container>*","");
+    }
+
+    const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/{{room_name}}/`;
+    const socket = new WebSocket(wsEndpoint);
+
+    document.getElementById('post-form').addEventListener('submit', function(event){
+        event.preventDefault();
+        const message = document.getElementById('message').value;
+        if (message){
+            socket.send(
+                JSON.stringify({
+                    'message': message,
+                    'room_name': '{{room_name}}',
+                    'sender': '{{user}}',
+                })
+            )}
+    });
+
+    // response from consumer on server
+    socket.addEventListener("message", (event) => {
+        const messageData = JSON.parse(event.data)['message'];
+        console.log(messageData);
+
+        var sender = messageData['sender'];
+        var message = messageData['message'];
+
+        // empty message input field after message has been sent
+        if (sender == '{{user}}'){
+            document.getElementById('message').value = '';
+        }
+
+        // Here's where we append the message to the chatbox.
+        var messageDiv = document.querySelector('.chat-container');
+        if (sender != '{{user}}') { // assuming you have a variable `currentUser` to hold the current user's name
+            messageDiv.innerHTML += `
+            <section class='chat-body receiver'>
+                <div class='user-name'>${sender}</div>
+                <div class='user-msg'>${message}</div>
+                <div class='time-stamp'></div>
+            </section>
+            `;
+        } else {
+            messageDiv.innerHTML += `
+            <section class='chat-body sender'>
+                <div class='user-name'>${sender}</div>
+                <div class='user-msg'>${message}</div>
+                <div class='time-stamp'></div>
+            </section>
+            `;
+        }
+        scrollToBottom();
+    });
+
+    socket.onopen = (event) => {
+        console.log("WebSocket connection opened!");
+    };
+
+    socket.onclose = (event) => {
+        console.log("WebSocket connection closed!");
+    };
+
+    $(".scroll-down").click(scrollToBottom);
+
+</script>
+{% endblock %}

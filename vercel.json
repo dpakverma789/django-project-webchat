@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "django_web_app_module/wsgi.py",
+      "src": "ChatProject/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     },
@@ -21,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "django_web_app_module/wsgi.py"
+      "dest": "ChatProject/wsgi.py"
     }
   ]
 }

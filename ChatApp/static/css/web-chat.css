@@ -47,13 +47,13 @@ body{
     overflow-y: scroll;
 }
 
-.chat-container section:nth-child(even){
-    float: right;
+.receiver{
+    float: left;
     top: 8vh;
 }
 
-.chat-container section:nth-child(odd){
-    float: left;
+.sender{
+    float: right;
     top: 8vh;
 }
 
@@ -61,9 +61,10 @@ body{
 .chat-body{
     background-color: white;
     height: auto;
-    width: 48%;
+    min-width: 45%;
+    max-width: 90%;
     border-radius: 15px;
-    top: 5vh;
+    top: 8vh;
     position: relative;
     margin: 1vh 3vw;
     word-wrap: break-word;
@@ -162,4 +163,12 @@ body{
     font-size: 30px;
     right: 5vw;
     cursor: pointer;
+}
+
+@media screen and (max-width: 700px){
+    .chat-body{
+        max-width: 90%;
+        min-width: 60%;
+        font-size: 12px;
+    }
 }

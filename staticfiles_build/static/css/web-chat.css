@@ -30,19 +30,30 @@ body{
     text-transform: capitalize;
 }
 
+.room-exit > a{
+    color: #fff;
+    text-decoration: none;
+    float: right;
+    position: fixed;
+    top: 3vh;
+    right: 5vw;
+    font-size: 23px;
+}
+
 .chat-container{
     position:fixed;
     height: 93%;
-    overflow: scroll;
+    width: 100%;
+    overflow-y: scroll;
 }
 
-.chat-container section:nth-child(even){
-    float: right;
+.receiver{
+    float: left;
     top: 8vh;
 }
 
-.chat-container section:nth-child(odd){
-    float: left;
+.sender{
+    float: right;
     top: 8vh;
 }
 
@@ -50,9 +61,10 @@ body{
 .chat-body{
     background-color: white;
     height: auto;
-    width: 45%;
+    min-width: 45%;
+    max-width: 90%;
     border-radius: 15px;
-    top: 5vh;
+    top: 8vh;
     position: relative;
     margin: 1vh 3vw;
     word-wrap: break-word;
@@ -144,6 +156,19 @@ body{
     cursor: pointer;
 }
 
-.fa-keyboard:hover{
-    background-color: red;
+.scroll-down{
+    position: fixed;
+    color: #000;
+    bottom: 7vh;
+    font-size: 30px;
+    right: 5vw;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px){
+    .chat-body{
+        max-width: 90%;
+        min-width: 60%;
+        font-size: 12px;
+    }
 }
