@@ -85,10 +85,10 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'uawhyquc',
-        'USER': 'uawhyquc',
-        'PASSWORD': 'FC-0MSOEBIIDaCXfXXG0GfubkoPl7UrU',
-        'HOST': 'snuffleupagus.db.elephantsql.com'
+        'NAME': 'njiulryt',
+        'USER': 'njiulryt',
+        'PASSWORD': 'Ow7vnAMuxkyLWuqo_BCIpEByUK2_5gM1',
+        'HOST': 'cornelius.db.elephantsql.com'
     }
 }
 
@@ -145,4 +145,4 @@ SECURE_SSL_REDIRECT = True
 # HSTS SETTINGS
 SECURE_HSTS_SECONDS = 3153600
 SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS =True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
