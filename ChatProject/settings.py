@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=m1^$ql(%@l&m_d()&st30d!b^hc5cjl5@9!+*mlheo)v&o(y=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.230.35', '127.0.0.1','.vercel.app','.now.sh']
+ALLOWED_HOSTS = ['192.168.135.35', '127.0.0.1','.vercel.app','.now.sh']
 
 
 # Application definition
@@ -86,10 +86,10 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'njiulryt',
-        'USER': 'njiulryt',
-        'PASSWORD': 'Ow7vnAMuxkyLWuqo_BCIpEByUK2_5gM1',
-        'HOST': 'cornelius.db.elephantsql.com'
+        'NAME': 'django_web_chat',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost'
     }
 }
 
@@ -139,13 +139,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# HTTPS SETTINGS
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
-
-# HSTS SETTINGS
-SECURE_HSTS_SECONDS = 3153600
-SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
